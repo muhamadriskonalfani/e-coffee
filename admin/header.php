@@ -48,29 +48,27 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--black);
+            background: #ddd;
             padding: 0 4%;
         }
 
+        header a {
+            text-decoration: none;
+        }
+
         .header h5 {
-            color: var(--white);
+            color: var(--black);
         }
 
         .header h6 {
-            color: var(--white);
+            color: var(--black);
         }
 
-        .header h5:hover,
-        .header h6:hover {
-            color: var(--main-color);
-            border-bottom: .15rem solid var(--main-color);
-            padding-bottom: .6rem;
-        }
 
         .aside {
             grid-area: aside;
             padding: 20px;
-            background: var(--white);
+            background: #eee;
         }
 
         .aside .links {
@@ -110,7 +108,7 @@
 
         <header class="header">
             <div class="title">
-                <h5>Monoline Coffee</h5>
+                <a href="../index.php"><h5>Monoline Coffee</h5></a>
             </div>
             
             <?php if(isset($_SESSION['admin'])): ?>
@@ -120,7 +118,7 @@
 
         <section class="aside">
             <div class="logo">
-                <img src="../assets/img/logo2.png" alt="" class="img-thumbnail">
+                <img src="../assets/img/logo_2.png" alt="" class="img-thumbnail">
             </div>
 
             <div class="links">

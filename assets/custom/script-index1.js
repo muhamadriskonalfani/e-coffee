@@ -20,12 +20,6 @@ document.querySelector('#cart-btn').onclick = () => {
     searchForm.classList.remove('active');
 }
 
-document.querySelector('.container-fluid').onclick = () => {
-    navbar.classList.remove('active');
-    searchForm.classList.remove('active');
-    cartItem.classList.remove('active');
-}
-
 
 let header = document.querySelector('.header');
 

@@ -25,7 +25,7 @@
 
         <header class="header">
             <a href="#" class="logo">
-                <img src="assets/img/logo2.png" alt="">
+                <img src="assets/img/logo_2.png" alt="">
             </a>
 
             <nav class="navbar">
@@ -144,49 +144,73 @@
             <h1 class="heading"> our <span>product</span> </h1>
             <div class="box-container">
                 <div class="box">
-                    <img src="assets/img/p1.png" alt="">
+                    <img src="assets/img/250_como.jpg" alt="">
                     <h3>tasty and healty</h3>
                     <div class="price">$15.99 <span>20.99</span></div>
                     <a href="#" class="btn">add to cart</a>
                 </div>
                 <div class="box">
-                    <img src="assets/img/p2.png" alt="">
+                    <img src="assets/img/250_modena.jpg" alt="">
                     <h3>tasty and healty</h3>
                     <div class="price">$15.99 <span>20.99</span></div>
                     <a href="#" class="btn">add to cart</a>
                 </div>
                 <div class="box">
-                    <img src="assets/img/p3.png" alt="">
+                    <img src="assets/img/250_napoli.jpg" alt="">
                     <h3>tasty and healty</h3>
                     <div class="price">$15.99 <span>20.99</span></div>
                     <a href="#" class="btn">add to cart</a>
                 </div>
                 <div class="box">
-                    <img src="assets/img/p4.png" alt="">
+                    <img src="assets/img/250_roma.jpg" alt="">
                     <h3>tasty and healty</h3>
                     <div class="price">$15.99 <span>20.99</span></div>
                     <a href="#" class="btn">add to cart</a>
                 </div>
                 <div class="box">
-                    <img src="assets/img/p5.png" alt="">
+                    <img src="assets/img/500_como.jpg" alt="">
                     <h3>tasty and healty</h3>
                     <div class="price">$15.99 <span>20.99</span></div>
                     <a href="#" class="btn">add to cart</a>
                 </div>
                 <div class="box">
-                    <img src="assets/img/p6.png" alt="">
+                    <img src="assets/img/500_modena.jpg" alt="">
                     <h3>tasty and healty</h3>
                     <div class="price">$15.99 <span>20.99</span></div>
                     <a href="#" class="btn">add to cart</a>
                 </div>
                 <div class="box">
-                    <img src="assets/img/p5.png" alt="">
+                    <img src="assets/img/500_napoli.jpg" alt="">
                     <h3>tasty and healty</h3>
                     <div class="price">$15.99 <span>20.99</span></div>
                     <a href="#" class="btn">add to cart</a>
                 </div>
                 <div class="box">
-                    <img src="assets/img/p6.png" alt="">
+                    <img src="assets/img/500_roma.jpg" alt="">
+                    <h3>tasty and healty</h3>
+                    <div class="price">$15.99 <span>20.99</span></div>
+                    <a href="#" class="btn">add to cart</a>
+                </div>
+                <div class="box">
+                    <img src="assets/img/drink_arabika.jpg" alt="">
+                    <h3>tasty and healty</h3>
+                    <div class="price">$15.99 <span>20.99</span></div>
+                    <a href="#" class="btn">add to cart</a>
+                </div>
+                <div class="box">
+                    <img src="assets/img/drink_excelsa.jpg" alt="">
+                    <h3>tasty and healty</h3>
+                    <div class="price">$15.99 <span>20.99</span></div>
+                    <a href="#" class="btn">add to cart</a>
+                </div>
+                <div class="box">
+                    <img src="assets/img/drink_liberika.jpg" alt="">
+                    <h3>tasty and healty</h3>
+                    <div class="price">$15.99 <span>20.99</span></div>
+                    <a href="#" class="btn">add to cart</a>
+                </div>
+                <div class="box">
+                    <img src="assets/img/drink_robusta.jpg" alt="">
                     <h3>tasty and healty</h3>
                     <div class="price">$15.99 <span>20.99</span></div>
                     <a href="#" class="btn">add to cart</a>
