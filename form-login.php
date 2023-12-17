@@ -66,8 +66,8 @@
     <div class="kotak-login">
         <h1>Selamat Datang di KopiKita</h1>
         <form method="POST" action="proses.php">
-            <input type="email" name="email" placeholder="Email" required value="<?php if(isset($_SESSION['data'])): echo $_SESSION['data']['email']; endif; ?>">
-            <input type="password" name="password" placeholder="Password" required value="<?php if(isset($_SESSION['data'])): echo $_SESSION['data']['pass']; endif; ?>">
+            <input type="email" name="email" placeholder="Email" required value="<?php if(isset($_SESSION['dataDaftar'])): echo $_SESSION['dataDaftar']['email']; endif; ?>">
+            <input type="password" name="password" placeholder="Password" required value="<?php if(isset($_SESSION['dataDaftar'])): echo $_SESSION['dataDaftar']['pass']; endif; ?>">
             <button type="submit" name="login">Login</button>
         </form>
         <p class="link-daftar">Belum punya akun? <a href="form-daftar.php">Daftar</a></p>

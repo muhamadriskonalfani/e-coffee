@@ -111,9 +111,16 @@
                 <a href="../index.php"><h5>Monoline Coffee</h5></a>
             </div>
             
-            <?php if(isset($_SESSION['admin'])): ?>
-                <h6>Hi, <?php echo $_SESSION['admin']; ?></h6>
-            <?php endif; ?>
+            <?php 
+                if(isset($_SESSION['adminID'])) {
+                    $adminID = $_SESSION['adminID'];
+                    $sqlAdmin = mysqli_query($koneksi, "SELECT * FROM tb_admin WHERE id_admin = '$adminID'");
+                    $adminName = mysqli_fetch_array($sqlAdmin)['username'];
+            ?>
+                <h6>Hi, <?php echo $adminName; ?></h6>
+            <?php 
+                }
+            ?>
         </header>
 
         <section class="aside">

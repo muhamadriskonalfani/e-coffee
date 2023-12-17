@@ -59,7 +59,7 @@
                                     <?php echo $data['nama_produk']; ?>
                                 </td>
                                 <td>
-                                    <img src="../assets/img/<?php echo $data['gambar_produk']; ?>" alt="<?php echo "&nbsp;" . $data['gambar_produk']; ?>" style="width: 150px;">
+                                    <img src="../assets/product_image/<?php echo $data['gambar_produk']; ?>" alt="" style="width: 150px;">
                                 </td>
                                 <td>
                                     <?php echo $data['harga']; ?>

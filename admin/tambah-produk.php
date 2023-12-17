@@ -20,7 +20,7 @@
 
             <!-- Form Tambah Data -->
             <div class="table-responsive">
-                <form method="POST" action="proses-produk.php">
+                <form method="POST" action="proses-produk.php" enctype="multipart/form-data">
                     <table class="table table-borderless">
                         <tbody>
                             <tr>
@@ -29,7 +29,7 @@
                             </tr>
                             <tr>
                                 <td>Gambar Produk</td>
-                                <td><input type="text" name="gambar_produk" placeholder="Gambar Produk" class="form-control" required></td>
+                                <td><input type="file" name="gambar_produk" accept="image/*" placeholder="Gambar Produk" class="form-control" required></td>
                             </tr>
                             <tr>
                                 <td>Deskripsi</td>

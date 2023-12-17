@@ -26,7 +26,7 @@
                     $data = mysqli_fetch_array($query);
             ?>
                 <div class="table-responsive">
-                    <form method="POST" action="proses-produk.php">
+                    <form method="POST" action="proses-produk.php" enctype="multipart/form-data">
                         <input type="hidden" name="id_produk" value="<?php echo $data['id_produk']; ?>">
                         <table class="table table-borderless">
                             <tbody>
@@ -36,7 +36,7 @@
                                 </tr>
                                 <tr>
                                     <td>Gambar Produk</td>
-                                    <td><input type="text" name="gambar_produk" class="form-control" value="<?php echo $data['gambar_produk']; ?>" required></td>
+                                    <td><input type="file" name="gambar_produk" accept="image/*" class="form-control" required></td>
                                 </tr>
                                 <tr>
                                     <td>Deskripsi</td>

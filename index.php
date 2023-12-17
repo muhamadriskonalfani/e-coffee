@@ -17,10 +17,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- custom css link -->
-    <link rel="stylesheet" href="assets/custom/style-index7.css">
+    <link rel="stylesheet" href="assets/custom/style-index13.css">
+
+    <style>
+        
+    </style>
 
 </head>
 <body>
+
     <div class="container-fluid">
 
         <header class="header">
@@ -34,13 +39,29 @@
                 <a href="#product">product</a>
                 <a href="#review">review</a>
                 <a href="#contact">contact</a>
-                <a href="form-login.php">login</a>
+                <?php if(isset($_SESSION['userID'])) { ?>
+                    <a href="form-login.php" style="display: none;">login</a>
+                <?php } else { ?>
+                    <a href="form-login.php">login</a>
+                <?php } ?>
             </nav>
 
             <div class="icons">
                 <div class="fas fa-search" id="search-btn"></div>
                 <div class="fas fa-shopping-cart" id="cart-btn"></div>
                 <div class="fas fa-bars" id="menu-btn"></div>
+                <?php 
+                    if(isset($_SESSION['userID'])) {
+                        $userID = $_SESSION['userID'];
+                        $sqlUser = mysqli_query($koneksi, "SELECT * FROM tb_pengguna WHERE id_pengguna = '$userID'");
+                        $userName = mysqli_fetch_array($sqlUser)['username'];
+                ?>
+                    <a href="profile.php?userID=<?php echo $_SESSION['userID']; ?>" class="profile">
+                        <img src="assets/img/logo_1.png" title="<?php echo $userName; ?>" alt="">
+                    </a>
+                <?php
+                    }
+                ?>
             </div>
 
             <div class="search-form">
@@ -49,39 +70,38 @@
             </div>
 
             <div class="cart-items-container">
-                <div class="cart-item">
-                    <span class="fas fa-times"></span>
-                    <img src="assets/img/logo2.png" alt="">
-                    <div class="content">
-                        <h3>cart item 1</h3>
-                        <div class="price">$15.99</div>
-                    </div>
+                <div class="cart-box">
+                    <?php
+                        if(isset($_SESSION['userID'])) {
+                            $userID = $_SESSION['userID'];
+                            $sqlCart = mysqli_query($koneksi, "SELECT * FROM tb_keranjang WHERE id_keranjang = '$userID'");
+                            while($dataCart = mysqli_fetch_array($sqlCart)) {
+                    ?>
+                        <div class="cart-item">
+                            <div class="cart-image">
+                                <img src="assets/product_image/<?php echo $dataCart['gambar_produk']; ?>" alt="">
+                            </div>
+                            <div class="content">
+                                <h3><?php echo $dataCart['nama_produk']; ?> <span><?php echo $dataCart['quantity']; ?>x</span></h3>
+                                <div class="price">Rp.<?php echo $dataCart['harga']; ?></div>
+                            </div>
+                            <div class="delete-cart">
+                                <a href="proses.php?delete-cart=<?php echo $dataCart['id_produk']; ?>" class="fas fa-times" onclick="return confirm('Apakah Anda Yakin?')"></a>
+                            </div>
+                        </div>
+                    <?php
+                            }
+                        }
+                    ?>
                 </div>
-                <div class="cart-item">
-                    <span class="fas fa-times"></span>
-                    <img src="assets/img/logo2.png" alt="">
-                    <div class="content">
-                        <h3>cart item 2</h3>
-                        <div class="price">$15.99</div>
-                    </div>
+
+                <div class="checkout">
+                    <?php if(isset($_SESSION['userID'])) { ?>
+                        <a href="checkout.php?cartID=<?php echo $_SESSION['userID']; ?>" class="btn">checkout now</a>
+                    <?php } else { ?>
+                        <a href="form-login.php" class="btn">checkout now</a>
+                    <?php } ?>
                 </div>
-                <div class="cart-item">
-                    <span class="fas fa-times"></span>
-                    <img src="assets/img/logo2.png" alt="">
-                    <div class="content">
-                        <h3>cart item 3</h3>
-                        <div class="price">$15.99</div>
-                    </div>
-                </div>
-                <div class="cart-item">
-                    <span class="fas fa-times"></span>
-                    <img src="assets/img/logo2.png" alt="">
-                    <div class="content">
-                        <h3>cart item 4</h3>
-                        <div class="price">$15.99</div>
-                    </div>
-                </div>
-                <a href="#" class="btn">checkout now</a>
             </div>
         </header>
 
@@ -96,6 +116,12 @@
             <div class="home-image">
                 <img src="assets/img/main.png" alt="">
             </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section class="about" id="about">
+            <img src="assets/img/halaman3.png" alt="">
         </section>
 
         <div class="divider"></div>
@@ -143,78 +169,19 @@
         <section class="product" id="product">
             <h1 class="heading"> our <span>product</span> </h1>
             <div class="box-container">
-                <div class="box">
-                    <img src="assets/img/250_como.jpg" alt="">
-                    <h3>tasty and healty</h3>
-                    <div class="price">$15.99 <span>20.99</span></div>
-                    <a href="#" class="btn">add to cart</a>
-                </div>
-                <div class="box">
-                    <img src="assets/img/250_modena.jpg" alt="">
-                    <h3>tasty and healty</h3>
-                    <div class="price">$15.99 <span>20.99</span></div>
-                    <a href="#" class="btn">add to cart</a>
-                </div>
-                <div class="box">
-                    <img src="assets/img/250_napoli.jpg" alt="">
-                    <h3>tasty and healty</h3>
-                    <div class="price">$15.99 <span>20.99</span></div>
-                    <a href="#" class="btn">add to cart</a>
-                </div>
-                <div class="box">
-                    <img src="assets/img/250_roma.jpg" alt="">
-                    <h3>tasty and healty</h3>
-                    <div class="price">$15.99 <span>20.99</span></div>
-                    <a href="#" class="btn">add to cart</a>
-                </div>
-                <div class="box">
-                    <img src="assets/img/500_como.jpg" alt="">
-                    <h3>tasty and healty</h3>
-                    <div class="price">$15.99 <span>20.99</span></div>
-                    <a href="#" class="btn">add to cart</a>
-                </div>
-                <div class="box">
-                    <img src="assets/img/500_modena.jpg" alt="">
-                    <h3>tasty and healty</h3>
-                    <div class="price">$15.99 <span>20.99</span></div>
-                    <a href="#" class="btn">add to cart</a>
-                </div>
-                <div class="box">
-                    <img src="assets/img/500_napoli.jpg" alt="">
-                    <h3>tasty and healty</h3>
-                    <div class="price">$15.99 <span>20.99</span></div>
-                    <a href="#" class="btn">add to cart</a>
-                </div>
-                <div class="box">
-                    <img src="assets/img/500_roma.jpg" alt="">
-                    <h3>tasty and healty</h3>
-                    <div class="price">$15.99 <span>20.99</span></div>
-                    <a href="#" class="btn">add to cart</a>
-                </div>
-                <div class="box">
-                    <img src="assets/img/drink_arabika.jpg" alt="">
-                    <h3>tasty and healty</h3>
-                    <div class="price">$15.99 <span>20.99</span></div>
-                    <a href="#" class="btn">add to cart</a>
-                </div>
-                <div class="box">
-                    <img src="assets/img/drink_excelsa.jpg" alt="">
-                    <h3>tasty and healty</h3>
-                    <div class="price">$15.99 <span>20.99</span></div>
-                    <a href="#" class="btn">add to cart</a>
-                </div>
-                <div class="box">
-                    <img src="assets/img/drink_liberika.jpg" alt="">
-                    <h3>tasty and healty</h3>
-                    <div class="price">$15.99 <span>20.99</span></div>
-                    <a href="#" class="btn">add to cart</a>
-                </div>
-                <div class="box">
-                    <img src="assets/img/drink_robusta.jpg" alt="">
-                    <h3>tasty and healty</h3>
-                    <div class="price">$15.99 <span>20.99</span></div>
-                    <a href="#" class="btn">add to cart</a>
-                </div>
+                <?php
+                    $sqlProduct = mysqli_query($koneksi, "SELECT * FROM tb_produk");
+                    while($data = mysqli_fetch_array($sqlProduct)) {
+                ?>
+                    <div class="box">
+                        <img src="assets/product_image/<?php echo $data['gambar_produk']; ?>" alt="">
+                        <h3><?php echo $data['nama_produk']; ?></h3>
+                        <div class="price"><?php echo $data['harga']; ?> <span>20.99</span></div>
+                        <a href="proses.php?id_produk=<?php echo $data['id_produk']; ?>" class="btn">add to cart</a>
+                    </div>
+                <?php
+                    }
+                ?>
             </div>
         </section>
 
@@ -269,6 +236,12 @@
 
         <div class="divider"></div>
 
+        <section class="contact" id="contact">
+            <img src="assets/img/halaman4.png" alt="">
+        </section>
+
+        <div class="divider"></div>
+
         <section class="footer">
             <div class="share">
                 <a href="#" class="fab fa-facebook-f"></a>
@@ -293,7 +266,7 @@
 
 
     <!-- custom js file link -->
-    <script src="assets/custom/script-index1.js"></script>
+    <script src="assets/custom/script-index2.js"></script>
 </body>
 </html>
 

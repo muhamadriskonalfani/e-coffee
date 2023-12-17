@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        ji
+    </p>
+    <button type="button" class="make-order">Klik</button>
+
+    <script src="assets/sweetalert/sweetalert2.all.min.js"></script>
+    <script>
+            const form = document.querySelector('form#checkout-form');
+            const orderBtn = document.querySelector('.make-order');
+        
+            orderBtn.addEventListener('click', function (event) {
+                // Mendapatkan nilai input dari elemen-elemen radio
+                const delivery = document.querySelector('input[name="delivery"]:checked');
+                const payment = document.querySelector('input[name="payment"]:checked');
+        
+                // Memeriksa apakah kedua opsi radio sudah dipilih
+                let isDeliverySelected = delivery !== null;
+                let isPaymentSelected = payment !== null;
+        
+                // Jika keduanya sudah dipilih, formulir akan dikirim
+                if (isDeliverySelected && isPaymentSelected) {
+                    // Lakukan aksi submit atau tindakan lain sesuai kebutuhan
+                    alert("Mengirim formulir...");
+                } else {
+                    // Jika salah satu opsi radio belum dipilih, mencegah pengiriman formulir
+                    event.preventDefault();
+        
+                    // Memberikan fokus ke elemen input radio pertama yang belum dipilih
+                    if (!isDeliverySelected && delivery) {
+                        delivery.focus();
+                    } else if (!isPaymentSelected && payment) {
+                        payment.focus();
+                    }
+                }
+            });
+        
+    </script>
+</body>
+</html>

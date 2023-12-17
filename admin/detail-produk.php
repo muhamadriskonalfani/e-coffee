@@ -36,7 +36,7 @@
                     </div>
                     <div class="row mb-2">
                         <div class="col-md-2 pt-2"><h6>Gambar Produk</h6></div>
-                        <div class="col-md-10"><h6 class="form-control"><img src="../assets/img/<?php echo $data['gambar_produk']; ?>" class="img-fluid" alt="<?php echo "&nbsp;" . $data['gambar_produk']; ?>"></h6></div>
+                        <div class="col-md-10"><h6 class="form-control"><img src="../assets/product_image/<?php echo $data['gambar_produk']; ?>" class="img-fluid" alt="" width="250px"></h6></div>
                     </div>
                     <div class="row mb-2">
                         <div class="col-md-2 pt-2"><h6>Deskripsi</h6></div>
