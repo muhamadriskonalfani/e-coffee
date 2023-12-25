@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prototype 1</title>
+    <title>Beranda - M-Coffee</title>
 
     <!-- bootstrap 5 link -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- custom css link -->
-    <link rel="stylesheet" href="assets/custom/style-index13.css">
+    <link rel="stylesheet" href="assets/custom/style-index15.css">
 
     <style>
         
@@ -29,7 +29,7 @@
     <div class="container-fluid">
 
         <header class="header">
-            <a href="#" class="logo">
+            <a href="index.php" class="logo">
                 <img src="assets/img/logo_2.png" alt="">
             </a>
 
@@ -40,9 +40,9 @@
                 <a href="#review">review</a>
                 <a href="#contact">contact</a>
                 <?php if(isset($_SESSION['userID'])) { ?>
-                    <a href="form-login.php" style="display: none;">login</a>
+                    <a href="login.php" style="display: none;">login</a>
                 <?php } else { ?>
-                    <a href="form-login.php">login</a>
+                    <a href="login.php">login</a>
                 <?php } ?>
             </nav>
 
@@ -54,10 +54,14 @@
                     if(isset($_SESSION['userID'])) {
                         $userID = $_SESSION['userID'];
                         $sqlUser = mysqli_query($koneksi, "SELECT * FROM tb_pengguna WHERE id_pengguna = '$userID'");
-                        $userName = mysqli_fetch_array($sqlUser)['username'];
+                        $userData = mysqli_fetch_array($sqlUser);
                 ?>
-                    <a href="profile.php?userID=<?php echo $_SESSION['userID']; ?>" class="profile">
-                        <img src="assets/img/logo_1.png" title="<?php echo $userName; ?>" alt="">
+                    <a href="user/profile-data.php?userID=<?php echo $_SESSION['userID']; ?>" class="profile">
+                        <?php if($userData['foto_profil'] == NULL) { ?>
+                            <img src="assets/img/profile.jpeg" alt="">
+                        <?php } else { ?>
+                            <img src="assets/photo_profile/<?php echo $userData['foto_profil']; ?>" title="<?php echo $userData['username']; ?>" alt="">
+                        <?php } ?>
                     </a>
                 <?php
                     }
@@ -99,7 +103,7 @@
                     <?php if(isset($_SESSION['userID'])) { ?>
                         <a href="checkout.php?cartID=<?php echo $_SESSION['userID']; ?>" class="btn">checkout now</a>
                     <?php } else { ?>
-                        <a href="form-login.php" class="btn">checkout now</a>
+                        <a href="login.php" class="btn">checkout now</a>
                     <?php } ?>
                 </div>
             </div>
@@ -177,7 +181,11 @@
                         <img src="assets/product_image/<?php echo $data['gambar_produk']; ?>" alt="">
                         <h3><?php echo $data['nama_produk']; ?></h3>
                         <div class="price"><?php echo $data['harga']; ?> <span>20.99</span></div>
-                        <a href="proses.php?id_produk=<?php echo $data['id_produk']; ?>" class="btn">add to cart</a>
+                        <?php if(isset($_SESSION['userID'])) { ?>
+                            <a href="proses.php?id_produk=<?php echo $data['id_produk']; ?>" class="btn">add to cart</a>
+                        <?php } else { ?>
+                            <a href="login.php" class="btn">add to cart</a>
+                        <?php } ?>
                     </div>
                 <?php
                     }

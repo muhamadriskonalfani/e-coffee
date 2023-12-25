@@ -151,16 +151,8 @@
         }
 
 
-        .main {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
         .main .information .contact {
             margin-bottom: 2rem;
-
-            border: var(--border);
         }
 
         .main .information .contact h5 {
@@ -196,6 +188,63 @@
             color: var(--black);
             
             border: var(--border);
+        }
+
+        .main .information .delivery {
+            margin-bottom: 1.7rem;
+
+            border: var(--border);
+        }
+
+        .main .information .delivery h5,
+        .main .information .payment h5 {
+            margin-bottom: 1.7rem;
+
+            border: var(--border);
+        }
+
+        .main .information .delivery .delivery-box,
+        .main .information .payment .payment-box {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 2rem;
+
+            border: var(--border);
+        }
+
+        .main .information .delivery .delivery-box .delivery-item,
+        .main .information .payment .payment-box .payment-item {
+            width: 7rem;
+            height: 4rem;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border: var(--border);
+        }
+
+        .main .information .delivery .delivery-box .delivery-item:hover,
+        .main .information .payment .payment-box .payment-item:hover {
+            border: 2px solid var(--btn-primary);
+        }
+
+        .main .information .delivery .delivery-box .delivery-item.active,
+        .main .information .payment .payment-box .payment-item.active {
+            border: 2px solid var(--btn-primary);
+        }
+
+        .main .information .delivery .delivery-box .delivery-item input,
+        .main .information .payment .payment-box .payment-item input {
+            display: none;
+        }
+
+        .main .information .delivery .delivery-box .delivery-item img,
+        .main .information .payment .payment-box .payment-item img {
+            width: 100%;
+            height: 100%;
         }
 
 
@@ -340,11 +389,49 @@
                                 </div>
                             </div>
                         </div>
-                        
+                        <hr>
+
+                        <div class="delivery">
+                            <h5>2. Delivery Method</h5>
+                            <div class="delivery-box">
+                                <div class="delivery-item">
+                                    <input type="radio" id="delivery1" name="delivery" required>
+                                    <label for="delivery1"><img src="assets/img/jne.jpeg" alt=""></label>
+                                </div>
+                                <div class="delivery-item">
+                                    <input type="radio" id="delivery2" name="delivery" required>
+                                    <label for="delivery2"><img src="assets/img/jnt.jpeg" alt=""></label>
+                                </div>
+                                <div class="delivery-item">
+                                    <input type="radio" id="delivery3" name="delivery" required>
+                                    <label for="delivery3"><img src="assets/img/sicepat.jpeg" alt=""></label>
+                                </div>
+                                <div class="delivery-item">
+                                    <input type="radio" id="delivery4" name="delivery" required>
+                                    <label for="delivery4"><img src="assets/img/gosend.jpeg" alt=""></label>    
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="payment">
+                            <h5>3. Payment Method</h5>
+                            <div class="payment-box">
+                                <div class="payment-item">
+                                    <input type="radio" id="payment1" name="payment" required>
+                                    <label for="payment1"><img src="assets/img/bca.jpeg" alt=""></label>
+                                </div>
+                                <div class="payment-item">
+                                    <input type="radio" id="payment2" name="payment" required>
+                                    <label for="payment2"><img src="assets/img/gopay.jpeg" alt=""></label>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
                     </div>
 
                     <div class="order">
-                        <button type="submit" name="order" class="btn make-order">buat pesanan</button>
+                        <button type="button" name="order" class="btn make-order">buat pesanan</button>
                     </div>
                 <?php endif; ?>
             </div>
@@ -367,6 +454,64 @@
     <script src="assets/sweetalert/sweetalert2.all.min.js"></script>
     
     <script>
+        const deliverItems = document.querySelectorAll('.delivery-item');
+        for (let i = 0; i < deliverItems.length; i++) {
+            deliverItems[i].addEventListener('click', () => {
+                deliverItems.forEach((e) => {
+                    e.classList.remove('active');
+                })
+                deliverItems[i].classList.add('active');
+            })
+        }
+
+        const paymentItem = document.querySelectorAll('.payment-item');
+        for (let i = 0; i < paymentItem.length; i++) {
+            paymentItem[i].addEventListener('click', () => {
+                paymentItem.forEach((e) => {
+                    e.classList.remove('active');
+                })
+                paymentItem[i].classList.add('active');
+            })
+        }
+
+
+        // Form Validasi
+        const orderBtn = document.querySelector('.make-order');
+        function validateForm() {
+            orderBtn.removeEventListener('click', validateForm); // dibawah ada kode untuk klik orderBtn secara otomatis, kode ini ditambahkan supaya orderBtn tidak menjalankan fungsi validateForm 2 kali
+
+            const delivery = document.querySelector('input[name="delivery"]:checked');
+            const payment = document.querySelector('input[name="payment"]:checked');
+
+            if(delivery !== null && payment !== null) { // jika delivery dan payment tidak null
+                Swal.fire({
+                    title: "Buat pesanan?",
+                    text: "Total tagihan Rp.<?php echo $totalHarga; ?>",
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes",
+                    cancelButtonText: "Cancel"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        orderBtn.type = 'submit'; // mengganti tipe button dengan tipe submit pada orderBtn
+                        orderBtn.click(); // orderBtn diklik secara otomatis
+                    } else {
+                        orderBtn.addEventListener('click', validateForm); // jika blok else dieksekusi maka orderBtn tidak memiliki event lagi, karena itu kode ini ditambahkan
+                    }
+                })
+            } else { // jika delivery atau payment tidak diisi
+                Swal.fire({
+                    title: "Ada yang terlewat...",
+                    text: "Silahkan lengkapi data anda!",
+                    icon: "info"
+                });
+                orderBtn.addEventListener('click', validateForm); // jika blok else dieksekusi maka orderBtn tidak memiliki event lagi, karena itu kode ini ditambahkan
+            }
+        }
+        orderBtn.addEventListener('click', validateForm); // jika orderBtn diklik maka akan menjalankan fungsi validateForm
+
         
         // Delete Product Item
         const deleteButtons = document.querySelectorAll('.delete-product');

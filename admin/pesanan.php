@@ -17,10 +17,10 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th style="min-width: 100px;">ID Pesanan</th>
-                            <th style="min-width: 120px;">ID Pengguna</th>
+                            <th style="min-width: 120px;">ID Pesanan</th>
+                            <th style="min-width: 120px;">Nama Pengguna</th>
+                            <th style="min-width: 120px;">Tagihan Pembayaran</th>
                             <th style="min-width: 170px;">Tanggal Pesanan</th>
-                            <th style="min-width: 120px;">Jumlah Total</th>
                             <th style="min-width: 130px;">Status Pesanan</th>
                             <th style="min-width: 170px;">Status Pembayaran</th>
                             <th style="min-width: 100px;">Aksi</th>
@@ -29,31 +29,31 @@
                     <tbody>
 
                         <?php
-                            $query = mysqli_query($koneksi, "SELECT * FROM tb_pesanan");
-                            while($data = mysqli_fetch_assoc($query)){
+                            $sqlSelectOrder = mysqli_query($koneksi, "SELECT * FROM tb_pesanan");
+                            while($orderData = mysqli_fetch_assoc($sqlSelectOrder)) {
                         ?>
 
                             <tr>
                                 <td>
-                                    <?php echo $data['id_pesanan']; ?>
+                                    <?php echo $orderData['id_pesanan']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $data['id_pengguna']; ?>
+                                    <?php echo $orderData['nama_depan']." ".$orderData['nama_belakang']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $data['tanggal_pesanan']; ?>
+                                    <?php echo $orderData['jumlah_total']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $data['jumlah_total']; ?>
+                                    <?php echo $orderData['tanggal_pesanan']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $data['status_pesanan']; ?>
+                                    <?php echo $orderData['status_pesanan']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $data['status_pembayaran']; ?>
+                                    <?php echo $orderData['status_pembayaran']; ?>
                                 </td>
                                 <td>
-                                    <a href="detail-pesanan.php?detail-pesanan=<?php echo $data['id_pesanan']; ?>" type="button" class="btn btn-primary btn-sm">
+                                    <a href="detail-pesanan.php?detail-pesanan=<?php echo $orderData['id_pesanan']; ?>" type="button" class="btn btn-primary btn-sm">
                                         <i class="fa fa-search"></i>
                                         detail
                                     </a>

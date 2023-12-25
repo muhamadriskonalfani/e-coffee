@@ -22,7 +22,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url('assets/img/area1.jpg');
+            background-image: url('assets/img/bg.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -64,6 +64,7 @@
 </head>
 <body>
     <div class="kotak-daftar">
+        <img src="assets/img/logo_1.png" width="200px" alt="">
         <h1>Selamat Datang di KopiKita</h1>
         <form method="POST" action="proses.php">
             <input type="text" name="username" placeholder="Username" required>

@@ -17,7 +17,7 @@
                 header('location: admin/admin.php');
             } else {
                 $_SESSION['gagal'] = "Username atau Password yang anda masukan salah. Silahkan coba lagi";
-                header('location: form-login.php');
+                header('location: login.php');
             }
         } else if($checkUser) {
             $_SESSION['userID'] = $userID;
@@ -33,7 +33,7 @@
 
         if($pass !== $confirm) {
             $_SESSION['gagal'] = "Password yang anda masukan berbeda";
-            header('location: form-daftar.php');
+            header('location: register.php');
         } else {
             $sqlDaftar = mysqli_query($koneksi, "INSERT INTO tb_pengguna (id_pengguna, username, password, nama_depan, nama_belakang, alamat_email, alamat_pengiriman, nomor_telepon, tanggal_registrasi) VALUES (NULL, '$user', '$pass', '', '', '$email', '', '', NOW())");
             if($sqlDaftar) {
@@ -42,10 +42,10 @@
                     'pass' => $pass
                 );
                 $_SESSION['dataDaftar'] = $dataDaftar;
-                header('location: form-login.php');
+                header('location: login.php');
             } else {
                 $_SESSION['gagal'] = "Username atau Password sudah digunakan";
-                header('location: form-daftar.php');
+                header('location: register.php');
             }
         }
     }
@@ -94,13 +94,15 @@
         $address = $_POST['alamat_pengiriman'];
         $emailAdd = $_POST['alamat_email'];
         $phone = $_POST['nomor_telepon'];
+        $quantity = $_POST['quantity'];
         $subTotal = $_POST['jumlah_total'];
         
 
-        $sqlMakeOrder = mysqli_query($koneksi, "INSERT INTO tb_pesanan (id_pesanan, id_pengguna, nama_depan, nama_belakang, alamat_pengiriman, alamat_penagihan, alamat_email, nomor_telepon, tanggal_pesanan, jumlah_total, status_pesanan, metode_pembayaran, status_pembayaran, metode_pengiriman, nomor_pelacakan, catatan) VALUES (NULL, '$userID', '$firstName', '$lastName', '$address', '', '$emailAdd', '$phone', NOW(), '$subTotal', '', '', '', '', '', '')");
+        $sqlMakeOrder = mysqli_query($koneksi, "INSERT INTO tb_pesanan (id_pesanan, id_pengguna, nama_depan, nama_belakang, alamat_pengiriman, alamat_email, nomor_telepon, tanggal_pesanan, quantity, jumlah_total, status_pesanan, status_pembayaran) VALUES (NULL, '$userID', '$firstName', '$lastName', '$address', '$emailAdd', '$phone', NOW(), '$quantity', '$subTotal', '', '')");
 
         if($sqlMakeOrder) {
-            header('location: detail_pesanan.php');
+            $orderID = $koneksi->insert_id;
+            header("location: midtrans/examples/snap/checkout-process-simple-version.php?order_id=$orderID");
         }
     }
 
@@ -114,6 +116,53 @@
             }
         }
     }
+
+    if(isset($_POST['edit-profile'])) {
+        $userID = $_POST['id_pengguna'];
+        $nickname = $_POST['nama_depan'];
+        $last_name = $_POST['nama_belakang'];
+        $username = $_POST['username'];
+        $email = $_POST['alamat_email'];
+        $gender = $_POST['jenis_kelamin'];
+        $phone = $_POST['nomor_telepon'];
+        $address = $_POST['alamat_pengiriman'];
+        $city = $_POST['kota'];
+
+        $sqlUpdateProfile = mysqli_query($koneksi, "UPDATE tb_pengguna SET nama_depan = '$nickname', nama_belakang = '$last_name', username = '$username', alamat_email = '$email', jenis_kelamin = '$gender', nomor_telepon = '$phone', alamat_pengiriman = '$address', kota = '$city' WHERE id_pengguna = '$userID'");
+
+        if($sqlUpdateProfile) {
+            header('location: user/profile-data.php');
+        }
+    }
+
+    if(isset($_POST['update-photo'])) {
+        $userID = $_POST['id_pengguna'];
+
+        $dir = "assets/photo_profile/";
+        $sqlUser = mysqli_query($koneksi, "SELECT * FROM tb_pengguna WHERE id_pengguna = '$userID'");
+        $dataUser = mysqli_fetch_assoc($sqlUser);
+
+        if($dataUser['foto_profil'] == "") {
+            $foto_profil = $userID.$_FILES['foto_profil']['name'];
+        } else {
+            $foto_profil = $userID.$_FILES['foto_profil']['name'];
+            unlink($dir.$dataUser['foto_profil']);
+        }
+
+        $tmp_file = $_FILES['foto_profil']['tmp_name'];
+        move_uploaded_file($tmp_file, $dir.$foto_profil);
+
+        $sqlUpdatePhoto = mysqli_query($koneksi, "UPDATE tb_pengguna SET foto_profil = '$foto_profil' WHERE id_pengguna = '$userID'");
+        if($sqlUpdatePhoto) {
+            $_SESSION['berhasil'] = "Data berhasil diperbarui";
+            header('location: user/profile-data.php');
+        } else {
+            $_SESSION['gagal'] = "Data gagal diperbarui";
+            header('location: user/profile-data.php');
+        }
+        
+    }
     
 
 ?>
+

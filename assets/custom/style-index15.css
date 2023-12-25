@@ -153,6 +153,7 @@ section {
 
 .header .profile img {
     width: 100%;
+    height: 100%;
 }
 
 #menu-btn {
@@ -218,6 +219,7 @@ section {
 .header .cart-items-container .cart-item {
     position: relative;
     margin: 0 0 2rem;
+    padding: .7rem 0;
     display: grid;
     grid-template-areas: 'image content delete';
     grid-template-columns: 1fr 3fr .5fr;

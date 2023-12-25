@@ -38,6 +38,7 @@
                         <tr>
                             <th style="min-width: 100px;">ID Produk</th>
                             <th style="min-width: 150px;">Nama Produk</th>
+                            <th style="min-width: 170px;">Deskripsi Produk</th>
                             <th style="min-width: 170px;">Gambar Produk</th>
                             <th style="min-width: 100px;">Harga</th>
                             <th style="min-width: 100px;">Stok</th>
@@ -47,36 +48,39 @@
                     <tbody>
 
                         <?php
-                            $query = mysqli_query($koneksi, "SELECT * FROM tb_produk");
-                            while($data = mysqli_fetch_assoc($query)){
+                            $sqlSelectProduct = mysqli_query($koneksi, "SELECT * FROM tb_produk");
+                            while($productData = mysqli_fetch_assoc($sqlSelectProduct)) {
                         ?>
 
                             <tr>
                                 <td>
-                                    <?php echo $data['id_produk']; ?>
+                                    <?php echo $productData['id_produk']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $data['nama_produk']; ?>
+                                    <?php echo $productData['nama_produk']; ?>
                                 </td>
                                 <td>
-                                    <img src="../assets/product_image/<?php echo $data['gambar_produk']; ?>" alt="" style="width: 150px;">
+                                    <?php echo $productData['deskripsi']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $data['harga']; ?>
+                                    <?php echo $productData['gambar_produk']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $data['stok']; ?>
+                                    <?php echo $productData['harga']; ?>
                                 </td>
                                 <td>
-                                    <a href="detail-produk.php?detail-produk=<?php echo $data['id_produk']; ?>" type="button" class="btn btn-primary btn-sm">
+                                    <?php echo $productData['stok']; ?>
+                                </td>
+                                <td>
+                                    <a href="detail-produk.php?detail-produk=<?php echo $productData['id_produk']; ?>" type="button" class="btn btn-primary btn-sm">
                                         <i class="fa fa-search"></i>
                                         detail
                                     </a>
-                                    <a href="edit-produk.php?edit-produk=<?php echo $data['id_produk']; ?>" type="button" class="btn btn-success btn-sm">
+                                    <a href="edit-produk.php?edit-produk=<?php echo $productData['id_produk']; ?>" type="button" class="btn btn-success btn-sm">
                                         <i class="fa fa-pencil"></i>
                                         edit
                                     </a>
-                                    <a href="proses-produk.php?hapus-produk=<?php echo $data['id_produk']; ?>" type="button" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ingin menghapus data tersebut ???')">
+                                    <a href="proses-produk.php?hapus-produk=<?php echo $productData['id_produk']; ?>" type="button" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ingin menghapus data tersebut ???')">
                                         <i class="fa fa-trash"></i>
                                         hapus
                                     </a>
